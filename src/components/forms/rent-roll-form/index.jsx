@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import Form from '@/components/form';
 import Table from '@/components/table';
+import RentRollTabel from './rent-roll-table';
+import { columns } from './columns';
 
 export default function RentRollForm({ goNext, goBack }) {
   const titles = [
@@ -155,9 +157,15 @@ export default function RentRollForm({ goNext, goBack }) {
       sqft: '50',
     },
   ];
+
+
+  const data = [{
+
+  }];
   return (
     <Form title="Rent roll" goNext={goNext} goBack={goBack}>
-      <Table titles={titles} rows={rows} />
+      {/* <Table titles={titles} rows={rows} /> */}
+      <RentRollTabel columns={columns} data={rows} />
     </Form>
   );
 }

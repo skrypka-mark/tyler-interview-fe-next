@@ -6,16 +6,7 @@ export const useSteps = (defaultSteps) => {
   const pathname = usePathname();
 
   const [steps, setSteps] = useState(defaultSteps);
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    const { hash } = window.location;
-    const index = steps.findIndex((step) => step.hash === hash);
-
-    if (index === -1) return;
-
-    setCurrentIndex(index);
-  }, []);
+  const [currentIndex, setCurrentIndex] = useState(null);
 
   const push = (index) => {
     if (index > steps.length || !(index + 1)) return;
@@ -42,13 +33,19 @@ export const useSteps = (defaultSteps) => {
     setCurrentIndex(index);
     router.push(`${pathname}${steps[index].hash}`);
   };
-
   const goBack = () => {
     push(currentIndex - 1);
   };
   const goNext = () => {
     push(currentIndex + 1);
   };
+
+  useEffect(() => {
+    const { hash } = window.location;
+    const index = steps.findIndex((step) => step.hash === hash);
+
+    push(index === -1 ? 0 : index);
+  }, []);
 
   return [steps, { currentIndex, push, goBack, goNext }];
 };

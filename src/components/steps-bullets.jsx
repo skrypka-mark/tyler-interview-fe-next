@@ -9,17 +9,17 @@ export default function StepsBullets({ steps, stepClickHandler }) {
     <div>
       <nav className="flex justify-center" aria-label="Progress">
         <ol role="list" className="space-y-3">
-          {steps.map((step, stepIdx) => (
+          {steps.map((step, stepIdx) => step?.name && (
             <li
               key={step.name}
               className={classNames(
                 stepIdx !== steps.length - 1 ? '' : '',
-                'relative'
+                'relative w-full'
               )}
             >
               {step.status === 'complete' ? (
                 <>
-                  {stepIdx !== steps.length - 1 ? (
+                  {stepIdx !== steps.length - 1 && steps?.[stepIdx + 1]?.name ? (
                     <div
                       className="absolute left-2.5 top-3 -ml-px mt-0.5 h-full w-0.5 bg-black"
                       aria-hidden="true"
@@ -37,7 +37,7 @@ export default function StepsBullets({ steps, stepClickHandler }) {
                           aria-hidden="true"
                         />
                       </span>
-                      <span className="ml-3 text-sm font-medium text-gray-500 group-hover:text-gray-900">
+                      <span className="ml-3 text-sm font-medium text-gray-500 group-hover:text-gray-900 transition">
                         {step.name}
                       </span>
                     </span>
@@ -45,7 +45,7 @@ export default function StepsBullets({ steps, stepClickHandler }) {
                 </>
               ) : step.status === 'current' ? (
                 <>
-                  {stepIdx !== steps.length - 1 ? (
+                  {stepIdx !== steps.length - 1 && steps?.[stepIdx + 1]?.name ? (
                     <div
                       className="absolute left-2.5 top-3 -ml-px mt-1 h-full w-0.5 bg-gray-300"
                       aria-hidden="true"
@@ -63,14 +63,14 @@ export default function StepsBullets({ steps, stepClickHandler }) {
                       <span className="absolute h-4 w-4 rounded-full bg-gray-300" />
                       <span className="relative block h-2 w-2 rounded-full bg-gray-600" />
                     </span>
-                    <span className="ml-3 text-sm font-medium text-black">
+                    <span className="ml-3 text-sm font-medium text-black transition">
                       {step.name}
                     </span>
                   </a>
                 </>
               ) : (
                 <>
-                  {stepIdx !== steps.length - 1 ? (
+                  {stepIdx !== steps.length - 1 && steps?.[stepIdx + 1]?.name ? (
                     <div
                       className="absolute left-2.5 top-3 -ml-px mt-1 h-full w-0.5 bg-gray-300"
                       aria-hidden="true"
@@ -87,7 +87,7 @@ export default function StepsBullets({ steps, stepClickHandler }) {
                       >
                         <div className="h-2 w-2 rounded-full bg-gray-300 group-hover:bg-gray-400" />
                       </div>
-                      <p className="ml-3 text-sm font-medium text-gray-500 group-hover:text-gray-900">
+                      <p className="ml-3 text-sm font-medium text-gray-500 group-hover:text-gray-900 transition">
                         {step.name}
                       </p>
                     </div>

@@ -2,10 +2,25 @@ import { useContext, useMemo } from 'react';
 import { FormContext } from '@/context/form-context';
 import Form from '@/components/form';
 import TextFiled from '@/components/text-field';
+import SelectField from '@/components/select-field';
+
+const countryOptions = [
+  { value: 'united_kingdom', label: 'United Kingdom' },
+  { value: 'canada', label: 'Canada' },
+  { value: 'ukraine', label: 'Ukraine' },
+  { value: 'france', label: 'France' },
+  { value: 'germany', label: 'Germany' }
+];
+const cityOptions = [
+  { value: 'london', label: 'London' },
+  { value: 'Kyiv', label: 'Kyiv' },
+  { value: 'kharkiv', label: 'Kharkiv' },
+  { value: 'paris', label: 'Paris' },
+  { value: 'munich', label: 'Munich' }
+];
 
 export default function PropertyDetailForm({ goNext }) {
-  const { propertyDetailFormData, setPropertyDetailFormData } =
-    useContext(FormContext);
+  const { propertyDetailFormData, setPropertyDetailFormData } = useContext(FormContext);
 
   const isFromValid = useMemo(
     () => !Object.values(propertyDetailFormData).some((filed) => !filed),
@@ -15,7 +30,7 @@ export default function PropertyDetailForm({ goNext }) {
   const inputChangeHandler = ({ target }) => {
     setPropertyDetailFormData((state) => ({
       ...state,
-      [target.name]: target.value,
+      [target.name]: target.value
     }));
   };
 
@@ -25,13 +40,9 @@ export default function PropertyDetailForm({ goNext }) {
     }
   };
   return (
-    <Form
-      title="Property details"
-      className="flex flex-col gap-y-4"
-      isFirst
-      goNext={goNextClickHandler}
-    >
-      <h4 className="text-md font-medium">Property Detail</h4>
+    <Form title="Property details" className="flex flex-col gap-y-[1.5rem]" isFirst goNext={goNextClickHandler}>
+      <h4 className="text-md font-500">Property Detail</h4>
+
       <TextFiled
         name="propertyName"
         value={propertyDetailFormData.propertyName}
@@ -48,18 +59,22 @@ export default function PropertyDetailForm({ goNext }) {
       />
 
       <div className="flex gap-x-4 w-full">
-        <TextFiled
+        <SelectField
           name="country"
-          value={propertyDetailFormData.country}
-          placeholder="United Kingdom"
           label="Country"
+          options={countryOptions}
+          selected={propertyDetailFormData.country}
+          className='w-full'
+          withLabelClassName='w-full'
           onChange={inputChangeHandler}
         />
-        <TextFiled
+        <SelectField
           name="city"
-          value={propertyDetailFormData.city}
-          placeholder="London"
           label="City"
+          options={cityOptions}
+          selected={propertyDetailFormData.city}
+          className='w-full'
+          withLabelClassName='w-full'
           onChange={inputChangeHandler}
         />
         <TextFiled
@@ -67,6 +82,8 @@ export default function PropertyDetailForm({ goNext }) {
           value={propertyDetailFormData.zip}
           placeholder="SE1 1AB"
           label="ZIP/Postal Code"
+          withLabelClassName='w-[200px]'
+          className='w-[200px]'
           onChange={inputChangeHandler}
         />
       </div>

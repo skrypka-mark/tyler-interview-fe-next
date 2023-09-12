@@ -9,19 +9,34 @@ export default function Context({ children }) {
     country: '',
     city: '',
     zip: '',
-    closeDate: '',
+    closeDate: ''
   });
   const [financingFormData, setFinancingFormData] = useState({
     lender: '',
     loanAmount: '',
     startDate: '',
-    rateType: '',
+    rateType: 'fixed',
     interestRate: '',
-    interestCapitalization: '',
-    interestOnlyPeriod: '',
+    interestCapitalization: 'monthly',
+    interestOnlyPeriod: 0,
     term: '',
     amortization: '',
-    financingFees: '',
+    financingFees: ''
+  });
+  const [incomeExpensesFormData, setIncomeExpensesFormData] = useState({
+    netRental: '',
+    retailIncome: '',
+    insuranceIncome: '',
+    miscAdditionalIncome: '',
+    propertyTaxes: '',
+    insurance: '',
+    utilities: '',
+    repairsMaintenance: '',
+    adminExpense: '',
+    offSiteManagement: '',
+    onSiteManagement: '',
+    advertisingMarketing: '',
+    miscellaneous: ''
   });
 
   return (
@@ -29,8 +44,10 @@ export default function Context({ children }) {
       value={{
         propertyDetailFormData,
         financingFormData,
+        incomeExpensesFormData,
         setPropertyDetailFormData,
         setFinancingFormData,
+        setIncomeExpensesFormData
       }}
     >
       {children}

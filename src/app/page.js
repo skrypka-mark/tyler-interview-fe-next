@@ -1,8 +1,8 @@
-import StepsForm from '@/components/steps-form';
+import StepsForm from '../components/steps-form';
 
 export default function Home() {
   return (
-    <main className="px-28 py-8 mx-auto h-full">
+    <main className="flex w-full min-h-full px-[40px] py-[40px] mx-auto">
       <StepsForm />
     </main>
   );

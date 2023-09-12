@@ -11,12 +11,9 @@ export default function Form({
   className,
   onSubmit,
   goBack,
-  goNext,
+  goNext
 }) {
-  const renderTitle = () => (
-    <h2 className="text-xl font-semibold p-8">{title}</h2>
-  );
-  const renderHeader = () => <header className="p-8">{header}</header>;
+  const renderTitle = () => <h2 className="text-xl font-semibold p-8">{title}</h2>;
 
   const submitFormHandler = (e) => {
     e.preventDefault();
@@ -24,18 +21,11 @@ export default function Form({
   };
   return (
     <section className="flex flex-col w-full h-full">
-      <form
-        className="flex flex-col w-full h-full"
-        onSubmit={submitFormHandler}
-      >
+      <form className="flex flex-col w-full h-full" onSubmit={submitFormHandler}>
         {title && renderTitle()}
-        {header && renderHeader()}
+        {header && header}
         {isSeparator && <div className="w-full border-t-2" />}
-        <main
-          className={cn('basis-0 min-h-[90%] p-8 overflow-auto', className)}
-        >
-          {children}
-        </main>
+        <main className={cn('p-8', className)}>{children}</main>
       </form>
       <footer className="flex gap-x-4 mt-auto ml-auto p-8">
         {isFirst ? null : (
@@ -43,11 +33,9 @@ export default function Form({
             Back
           </Button>
         )}
-        {isLast ? null : (
-          <Button variant="primary" onClick={goNext}>
-            Continue
-          </Button>
-        )}
+        <Button variant="primary" onClick={goNext}>
+          {isLast ? 'Finished' : 'Continue'}
+        </Button>
       </footer>
     </section>
   );
