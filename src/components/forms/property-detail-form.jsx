@@ -3,21 +3,7 @@ import { FormContext } from '@/context/form-context';
 import Form from '@/components/form';
 import TextFiled from '@/components/text-field';
 import SelectField from '@/components/select-field';
-
-const countryOptions = [
-  { value: 'united_kingdom', label: 'United Kingdom' },
-  { value: 'canada', label: 'Canada' },
-  { value: 'ukraine', label: 'Ukraine' },
-  { value: 'france', label: 'France' },
-  { value: 'germany', label: 'Germany' }
-];
-const cityOptions = [
-  { value: 'london', label: 'London' },
-  { value: 'Kyiv', label: 'Kyiv' },
-  { value: 'kharkiv', label: 'Kharkiv' },
-  { value: 'paris', label: 'Paris' },
-  { value: 'munich', label: 'Munich' }
-];
+import { countryOptions, cityOptions } from '@/constants';
 
 export default function PropertyDetailForm({ goNext }) {
   const { propertyDetailFormData, setPropertyDetailFormData } = useContext(FormContext);

@@ -1,4 +1,5 @@
 import { createContext, useState } from 'react';
+import { countryOptions, cityOptions } from '@/constants';
 
 export const FormContext = createContext();
 
@@ -6,8 +7,8 @@ export default function Context({ children }) {
   const [propertyDetailFormData, setPropertyDetailFormData] = useState({
     propertyName: '',
     address: '',
-    country: '',
-    city: '',
+    country: countryOptions[0].value,
+    city: cityOptions[0].value,
     zip: '',
     closeDate: ''
   });
